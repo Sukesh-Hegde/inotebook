@@ -1,10 +1,10 @@
-import './App.css';
+import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from './components/Navbar';
-import Home from './components/Home';
-import About from './components/About';
-import NoteState from './context/notes/noteState';
-
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import About from "./components/About";
+import NoteState from "./context/notes/noteState";
+import Alert from "./components/Alert";
 
 function App() {
   return (
@@ -12,13 +12,14 @@ function App() {
       <NoteState>
         <Router>
           <Navbar />
-
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-          </Routes>
-          <Routes>
-            <Route exact path="/about" element={<About />} />
-          </Routes>
+          <Alert message="This is amzing "/>
+          <div className="container">
+            <Routes>
+              <Route exact path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              {/* Add other routes here */}
+            </Routes>
+          </div>
         </Router>
       </NoteState>
     </>

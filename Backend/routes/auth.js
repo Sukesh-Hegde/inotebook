@@ -49,7 +49,7 @@ authRouter.post(
           },
           "AIb6d35fvJM4O9pXqXQNla2jBCH9kuLz",
           {
-            expiresIn: "1h",
+            expiresIn: "180h",
           }
         );
 
@@ -102,7 +102,7 @@ authRouter.post(
         },
         "AIb6d35fvJM4O9pXqXQNla2jBCH9kuLz",
         {
-          expiresIn: "1h",
+          expiresIn: "180h",
         }
       );
 
