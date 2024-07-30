@@ -11,7 +11,9 @@ const fetchuser = (req, res, next) => {
   }
 
   try {
-    const data = jwt.verify(token, process.env.JWT_SECRET);
+    // const data = jwt.verify(token, process.env.JWT_SECRET);
+        const data = jwt.verify(token, "AIb6d35fvJM4O9pXqXQNla2jBCH9kuLz");
+
 
     req.userID = data.userID;
 
