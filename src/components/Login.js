@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NoteContext from "../context/notes/noteContext";
 
 const Login = () => {
+  const context = useContext(NoteContext);
+  const { showAlert } = context;
+
   const [credential, setCredentials] = useState({ email: "", password: "" });
   let navigate = useNavigate();
 
@@ -23,11 +27,15 @@ const Login = () => {
     const json = await response.json();
     console.log(json);
 
-
+    if (json.success) {
       //save the token and redirect
-      localStorage.setItem("token", json.authtoken);
-      navigate("/");
+      localStorage.setItem("token", json.token);
 
+      showAlert("Logged in Successfully", "success");
+      navigate("/");
+    } else {
+      showAlert("Invalid Details", "danger");
+    }
   };
 
   const onChange = (e) => {

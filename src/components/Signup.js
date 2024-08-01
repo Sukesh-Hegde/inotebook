@@ -1,7 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import NoteContext from "../context/notes/noteContext";
 
 const Signup = () => {
+    const context = useContext(NoteContext);
+    const { showAlert } = context;
+
   const [credential, setCredentials] = useState({
     name: "",
     email: "",
@@ -12,7 +16,7 @@ const Signup = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-      const {name, email, password} = credential;
+    const { name, email, password } = credential;
 
     const response = await fetch("http://localhost:4000/api/auth/createuser", {
       method: "POST",
@@ -26,14 +30,15 @@ const Signup = () => {
       }),
     });
     const json = await response.json();
-    console.log(json);
-
+    
     if (json.success) {
       //save the token and redirect
-      localStorage.setItem("token", json.authtoken);
-      navigate("/");
+      localStorage.setItem("token", json.token);
+
+      navigate("/login");
+      showAlert("Account Created Successfully", "success");
     } else {
-      alert("invalid credential");
+      showAlert("Invalid credential", "danger");
     }
   };
 

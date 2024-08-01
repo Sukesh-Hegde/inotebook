@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 const fetchuser = (req, res, next) => {
   // Get the user from the JWT token and add id to req object
   const token = req.header("auth-token");
-
   if (!token) {
     return res
       .status(401)
@@ -21,7 +20,7 @@ const fetchuser = (req, res, next) => {
 
   } catch (error) {
     console.error("Token verification error:", error.message);
-    res.status(401).send({ error: "Please authenticate using a valid token" });
+    res.status(401).send({ error: "token token is not matching" });
   }
 };
 

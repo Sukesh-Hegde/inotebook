@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import NoteContext from "../context/notes/noteContext";
 import NoteItem from "./NoteItem";
 import AddNote from "./AddNote";
+import { useNavigate } from "react-router-dom";
 
 export default function Notes() {
+  let navigate = useNavigate();
   const context = useContext(NoteContext);
-  const { notes, getNotes, editNote } = context;
+  const { notes, getNotes, editNote, showAlert } = context;
   const [note, setNote] = useState({
     id: "",
     etitle: "",
@@ -17,7 +19,11 @@ export default function Notes() {
   const refClose = useRef(null);
 
   useEffect(() => {
-    getNotes();
+    if (localStorage.getItem("token")) {
+      getNotes();
+    } else {
+      navigate("/login");
+    }
     // eslint-disable-next-line
   }, []);
 
@@ -34,6 +40,7 @@ export default function Notes() {
   const handleClick = (e) => {
     editNote(note.id, note.etitle, note.edescription, note.etag);
     refClose.current.click();
+    showAlert("Note Updated Successfully", "success");
   };
 
   const onChange = (e) => {
@@ -42,7 +49,7 @@ export default function Notes() {
 
   return (
     <>
-      <AddNote />
+      <AddNote showAlert={showAlert} />
       <button
         ref={ref}
         type="button"
@@ -136,7 +143,9 @@ export default function Notes() {
                 type="button"
                 className="btn btn-primary"
                 onClick={handleClick}
-                disabled={note.etitle.length < 5 || note.edescription.length < 5}
+                disabled={
+                  note.etitle.length < 5 || note.edescription.length < 5
+                }
               >
                 Update Note
               </button>

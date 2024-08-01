@@ -10,29 +10,27 @@ import Login from "./components/Login";
 import { useState } from "react";
 
 function App() {
-  const [alert, setAlert] = useState(null);
-  
-  const showAlert = (msg, type) => {
-    setAlert({
-      msg: msg,
-      type: type,
-    });
-    setTimeout(() => {
-      setAlert(null);
-    }, 1500);
-  };
+
+
   return (
     <>
       <NoteState>
         <Router>
           <Navbar />
-          <Alert message="This is amzing " />
+          <Alert  />
           <div className="container">
             <Routes>
-              <Route exact path="/" element={<Home />} />
+              <Route exact path="/" element={<Home  />} />
               <Route path="/about" element={<About />} />
-              <Route exact path="/login" element={<Login />} />
-              <Route path="/signup" element={<Signup />} />
+              <Route
+                exact
+                path="/login"
+                element={<Login  />}
+              />
+              <Route
+                path="/signup"
+                element={<Signup />}
+              />
               {/* Add other routes here */}
             </Routes>
           </div>
