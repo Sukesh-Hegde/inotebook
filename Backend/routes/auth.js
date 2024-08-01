@@ -17,10 +17,12 @@ authRouter.post(
   }),
 
   async (req, res) => {
+    let success = false;
+
     // If there are errors, return Bad request and the errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ errors: errors.array() });
+      return res.status(400).json({ success, errors: errors.array() });
     }
 
     try {
@@ -29,7 +31,10 @@ authRouter.post(
       if (user) {
         return res
           .status(400)
-          .json({ error: "Sorry, a user with this email already exists" });
+          .json({
+            success,
+            error: "Sorry, a user with this email already exists",
+          });
       }
       //hashing password
       const pass = req.body.password;
@@ -52,9 +57,10 @@ authRouter.post(
             expiresIn: "180h",
           }
         );
-
         //  Send token.
-        return res.status(200).send({ token });
+        success = true;
+
+        return res.status(200).send({ success, token });
       }
 
       res.json(user);
@@ -73,6 +79,7 @@ authRouter.post(
     body("password", "Password cannot be blank").exists(),
   ],
   async (req, res) => {
+    let success = false;
     // If there are errors, return Bad request and the errors
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
@@ -83,16 +90,18 @@ authRouter.post(
     try {
       let user = await User.findOne({ email });
       if (!user) {
-        return res
-          .status(400)
-          .json({ error: "Please try to login with correct credentials" });
+        return res.status(400).json({
+          success,
+          error: "Please try to login with correct credentials",
+        });
       }
 
       const passwordCompare = await bcrypt.compare(password, user.password);
       if (!passwordCompare) {
-        return res
-          .status(400)
-          .json({ error: "Please try to login with correct credentials" });
+        return res.status(400).json({
+          success,
+          error: "Please try to login with correct credentials",
+        });
       }
 
       const token = jwt.sign(
@@ -107,7 +116,8 @@ authRouter.post(
       );
 
       //  Send token.
-      return res.status(200).send({ token });
+      success = true;
+      return res.status(200).send({ success, token });
     } catch (error) {
       console.error(error.message);
       res.status(500).send("Internal Server Error");
