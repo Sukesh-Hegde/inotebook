@@ -3,8 +3,8 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-// const url = process.env.DB_URL;
-const url = "mongodb://localhost:27017/notebook";
+const url =
+  "mongodb+srv://sukeshhegde994591:12345@cluster0.mh8ggst.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
 export const connectUsingMongoose = async () => {
   try {
     await mongoose.connect(url, {
