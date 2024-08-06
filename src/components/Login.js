@@ -4,7 +4,7 @@ import NoteContext from "../context/notes/noteContext";
 
 const Login = () => {
   // const host = "http://localhost:4000";
-  const host = "https://inotebook-backend-rrv6.onrender.com";
+  const host = "https://inotebook-8btc.onrender.com";
 
   const context = useContext(NoteContext);
   const { showAlert } = context;
