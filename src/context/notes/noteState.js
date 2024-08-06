@@ -2,7 +2,9 @@ import { useState } from "react";
 import NoteContext from "./noteContext";
 
 const NoteState = (props) => {
-  const host = "http://localhost:4000";
+  // const host = "http://localhost:4000";
+  const host = "https://inotebook-backend-rrv6.onrender.com";
+
   const notesInitial = [];
 
   const [notes, setNotes] = useState(notesInitial);
@@ -20,7 +22,6 @@ const NoteState = (props) => {
 
   // Get all Notes
   const getNotes = async () => {
-
     const response = await fetch(`${host}/api/notes/fetchallnotes`, {
       method: "GET",
       headers: {
@@ -53,7 +54,7 @@ const NoteState = (props) => {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("token"),
       },
     });
     const json = await response.json();
@@ -71,7 +72,7 @@ const NoteState = (props) => {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
-        "auth-token": localStorage.getItem("token")
+        "auth-token": localStorage.getItem("token"),
       },
       body: JSON.stringify({ title, description, tag }),
     });
