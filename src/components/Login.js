@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import NoteContext from "../context/notes/noteContext";
 
 const Login = () => {
-  // const host = "http://localhost:4000";
-  const host = "https://inotebook-backend-rrv6.onrender.com";
+  const host = process.env.REACT_APP_BACKEND_URL;
 
   const context = useContext(NoteContext);
   const { showAlert } = context;
@@ -28,7 +27,6 @@ const Login = () => {
       }),
     });
     const json = await response.json();
-    console.log(json);
 
     if (json.success) {
       //save the token and redirect
