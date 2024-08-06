@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import NoteContext from "../context/notes/noteContext";
 
 const Signup = () => {
-    const context = useContext(NoteContext);
-    const { showAlert } = context;
+  // const host = "http://localhost:4000";
+  const host = "https://inotebook-backend-rrv6.onrender.com";
+
+  const context = useContext(NoteContext);
+  const { showAlert } = context;
 
   const [credential, setCredentials] = useState({
     name: "",
@@ -18,7 +21,7 @@ const Signup = () => {
     e.preventDefault();
     const { name, email, password } = credential;
 
-    const response = await fetch("http://localhost:4000/api/auth/createuser", {
+    const response = await fetch(`${host}/api/auth/createuser`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,7 +33,7 @@ const Signup = () => {
       }),
     });
     const json = await response.json();
-    
+
     if (json.success) {
       //save the token and redirect
       localStorage.setItem("token", json.token);

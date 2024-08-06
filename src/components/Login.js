@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import NoteContext from "../context/notes/noteContext";
 
 const Login = () => {
+  // const host = "http://localhost:4000";
+  const host = "https://inotebook-backend-rrv6.onrender.com";
+
   const context = useContext(NoteContext);
   const { showAlert } = context;
 
@@ -14,7 +17,7 @@ const Login = () => {
 
     const { email, password } = credential;
 
-    const response = await fetch("http://localhost:4000/api/auth/login", {
+    const response = await fetch(`${host}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
