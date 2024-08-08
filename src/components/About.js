@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <div>
+    <div className="container">
       <header className="bg-primary text-white text-center py-5">
         <div className="container">
           <h1>About Us</h1>
