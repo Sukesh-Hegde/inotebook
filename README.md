@@ -33,5 +33,8 @@ Contributions are welcome! Please feel free to submit a pull request or open an 
 
 ## Screenshots
 
+![Screenshot 2024-08-08 at 5 23 27 PM](https://github.com/user-attachments/assets/984dfeb9-c0a9-4ac5-9510-94d38ac1f4f8)
+
+![Screenshot 2024-08-08 at 5 24 13 PM](https://github.com/user-attachments/assets/669f8cd7-2e1a-48db-a1d2-6324393a38d2)
 
 
